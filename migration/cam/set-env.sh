@@ -25,7 +25,7 @@ chmod +x deploy_velero.sh
 
 #Install UI
 git clone https://github.com/fusor/mig-ui
-cd ./mig-UI/deploy
+cd ./mig-ui/deploy
 HOSTAPI='https://master:8443' ./deploy.sh
 
 echo "CAM and OpenShift Ready"
