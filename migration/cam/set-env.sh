@@ -14,7 +14,24 @@ clear
 stty -echo
 echo "export HOST1_IP=[[HOST_IP]]; export HOST2_IP=[[HOST2_IP]]" >> ~/.env; source ~/.env
 
+#Install CRs
 curl -LOs https://raw.githubusercontent.com/fusor/mig-controller/master/hack/deploy/deploy_mig.sh &> /dev/null
+chmod +x deploy_mig.sh
+./deploy_mig
+
+curl -LOs https://raw.githubusercontent.com/fusor/mig-controller/master/hack/deploy/deploy_velero.sh &> /dev/null
+chmod +x deploy_velero.sh
+./deploy_velero
+
+#Install UI
+mkdir migUI
+cd migUI
+curl -LOs https://raw.githubusercontent.com/fusor/mig-ui/master/deploy/deploy.sh &> /dev/null
+curl -LOs https://raw.githubusercontent.com/fusor/mig-ui/master/deploy/main.js &> /dev/null
+curl -LOs https://raw.githubusercontent.com/fusor/mig-ui/master/deploy/playbook.yaml &> /dev/null
+chmod +x deploy.sh
+
+HOSTAPI='https://master:8443' ./deploy.sh
 
 echo "CAM and OpenShift Ready"
 stty echo
