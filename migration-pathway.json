@@ -1,0 +1,11 @@
+{
+  "title": "Migration Tools",
+  "icon": "fa-openshift",
+  "courses": [
+    {
+      "external_link": "https://learn.openshift.com/migration/cam/",
+      "course_id": "cam",
+      "title": "Cluster Application Migration Tool"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+    "icon": "fa-openshift",
+    "title": "Getting Started With the Cluster Application Migration Tool (CAM)",
+    "description": "Learn how to migrate applications between OpenShift Clusters.",
+    "pathwayTitle": "OpenShift",
+    "difficulty": "intermediate",
+    "time": "20-30 minutes",
+    "backend": {
+        "imageid": "openshift-3-11-cluster",
+        "port": 8443
+    },
+    "environment": {
+        "showdashboard": true,
+        "dashboard": "Dashboard",
+        "uilayout": "terminal-terminal",
+        "hideintro": false,
+        "hidefinish": false
+    },
+    "details": {
+        "steps": [{
+            "title": "Step 1 - Introducing the Cluster Application Migration Tool",
+            "text": "01-introducing-cam.md"
+        }],
+        "intro": {
+            "courseData": "env-init.sh",
+            "code": "set-env.sh",
+            "text": "intro.md"
+        },
+        "finish": {
+            "text": "finish.md"
+        }
+    }
+}
