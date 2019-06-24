@@ -24,13 +24,8 @@ chmod +x deploy_velero.sh
 ./deploy_velero
 
 #Install UI
-mkdir migUI
-cd migUI
-curl -LOs https://raw.githubusercontent.com/fusor/mig-ui/master/deploy/deploy.sh &> /dev/null
-curl -LOs https://raw.githubusercontent.com/fusor/mig-ui/master/deploy/main.js &> /dev/null
-curl -LOs https://raw.githubusercontent.com/fusor/mig-ui/master/deploy/playbook.yaml &> /dev/null
-chmod +x deploy.sh
-
+git clone https://github.com/fusor/mig-ui
+cd ./migUI/deploy
 HOSTAPI='https://master:8443' ./deploy.sh
 
 echo "CAM and OpenShift Ready"
