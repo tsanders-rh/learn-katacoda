@@ -17,15 +17,15 @@ echo "export HOST1_IP=[[HOST_IP]]; export HOST2_IP=[[HOST2_IP]]" >> ~/.env; sour
 #Install CRs
 curl -LOs https://raw.githubusercontent.com/fusor/mig-controller/master/hack/deploy/deploy_mig.sh &> /dev/null
 chmod +x deploy_mig.sh
-./deploy_mig
+./deploy_mig.sh
 
 curl -LOs https://raw.githubusercontent.com/fusor/mig-controller/master/hack/deploy/deploy_velero.sh &> /dev/null
 chmod +x deploy_velero.sh
-./deploy_velero
+./deploy_velero.sh
 
 #Install UI
 git clone https://github.com/fusor/mig-ui
-cd ./migUI/deploy
+cd ./mig-UI/deploy
 HOSTAPI='https://master:8443' ./deploy.sh
 
 echo "CAM and OpenShift Ready"
