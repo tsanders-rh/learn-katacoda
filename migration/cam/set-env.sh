@@ -25,7 +25,7 @@ chmod +x deploy_velero.sh
 
 #Install UI
 #git clone https://github.com/fusor/mig-ui
-git clone -b http-deployment --single-branch git@github.com:eriknelson/mig-ui.git
+git clone -b http-deployment --single-branch https://github.com/eriknelson/mig-ui.git
 cd ./mig-ui/deploy
 HOSTAPI='https://master:8443' ./deploy.sh
 
