@@ -35,8 +35,8 @@ dahostname=$(oc get routes -n mig | grep ^mig-ui | awk '{print $2}' | sed 's/\./
 awk 'FNR==NR{ if (/(?i)/) p=NR; next} 1; FNR==p{ print "- (?i)//'"$dahostname"'(:|\\z)" }' /etc/origin/master/master-config.yaml /etc/origin/master/master-config.yaml > tmpfile && mv -f tmpfile /etc/origin/master/master-config.yaml
 
 #Restart Master
-master-restart api
-master-restart controllers
+#master-restart api
+#master-restart controllers
 
 echo "CAM and OpenShift Ready"
 stty echo
