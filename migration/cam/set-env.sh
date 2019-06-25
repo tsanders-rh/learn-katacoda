@@ -28,5 +28,13 @@ git clone https://github.com/fusor/mig-ui
 cd ./mig-ui/deploy
 HOSTAPI='https://master:8443' ./deploy.sh
 
+#Update CORS config
+dahostname=$(oc get routes -n mig | grep ^mig-ui | awk '{print $2}' | sed 's/\./\\\\./g')
+awk 'FNR==NR{ if (/(?i)/) p=NR; next} 1; FNR==p{ print "- (?i)//'"$dahostname"'(:|\\z)" }' /etc/origin/master/master-config.yaml /etc/origin/master/master-config.yaml > tmpfile && mv tmpfile /etc/origin/master/master-config.yaml
+
+#Restart Master
+master-restart api
+master-restart controllers
+
 echo "CAM and OpenShift Ready"
 stty echo
