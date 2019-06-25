@@ -27,7 +27,7 @@ chmod +x deploy_velero.sh
 #git clone https://github.com/fusor/mig-ui
 git clone -b http-deployment --single-branch https://github.com/eriknelson/mig-ui.git
 cd ./mig-ui/deploy
-dadomain="https://"$(oc get routes -n mig | grep ^mig-ui | awk '{print $2}' | cut -d . -f 2- -)
+dadomain="https://$(oc get routes -n mig | grep ^mig-ui | awk '{print $2}' | cut -d . -f 2- -)"
 HOSTAPI=$dadomain ./deploy.sh
 
 #Update CORS config
