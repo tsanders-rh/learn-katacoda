@@ -10,6 +10,12 @@ function wait_for_all_pods {
   timeout 300 "oc get pods -n $1 && [[ \$(oc get pods -n $1 -o jsonpath='{.items[*].status.containerStatuses[*].ready}' | grep -c 'false') -eq 0 ]]"
 }
 clear
+
+#Update CORS config
+dahn=mig-ui-mig.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
+dahn=echo $dahn | sed 's/\./\\./g'
+awk 'FNR==NR{ if (/(?i)/) p=NR; next} 1; FNR==p{ print "- (?i)//'"$dahn"'(:|\\z)" }' /etc/origin/master/master-config.yaml /etc/origin/master/master-config.yaml > tmpfile && mv -f tmpfile /etc/origin/master/master-config.yaml
+
 /usr/local/bin/launch.sh
 stty -echo
 echo "export HOST1_IP=[[HOST_IP]]; export HOST2_IP=[[HOST2_IP]]" >> ~/.env; source ~/.env
@@ -31,15 +37,6 @@ cd ./mig-ui/deploy
 #HOSTAPI=$dadomain ./deploy.sh
 dahostname=https://[[HOST_SUBDOMAIN]]-[[KATACODA_HOST]].environments.katacoda.com
 HOSTAPI=$dahostname ./deploy.sh
-
-#Update CORS config
-#dahostname=$(oc get routes -n mig | grep ^mig-ui | awk '{print $2}' | sed 's/\./\\\\./g')
-dahn=mig-ui-mig.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
-awk 'FNR==NR{ if (/(?i)/) p=NR; next} 1; FNR==p{ print "- (?i)//'"$dahn"'(:|\\z)" }' /etc/origin/master/master-config.yaml /etc/origin/master/master-config.yaml > tmpfile && mv -f tmpfile /etc/origin/master/master-config.yaml
-
-#Restart Master
-#master-restart api
-#master-restart controllers
 
 echo "CAM and OpenShift Ready"
 stty echo
