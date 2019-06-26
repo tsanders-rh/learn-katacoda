@@ -13,7 +13,7 @@ clear
 
 #Update CORS config
 dahn=mig-ui-mig.[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com
-dahn=$(echo $dahn | sed 's/\./\\./g')
+dahn=$(echo $dahn | sed 's/\./\\\\./g')
 awk 'FNR==NR{ if (/(?i)/) p=NR; next} 1; FNR==p{ print "- (?i)//'"$dahn"'(:|\\z)" }' /etc/origin/master/master-config.yaml /etc/origin/master/master-config.yaml > tmpfile && mv -f tmpfile /etc/origin/master/master-config.yaml
 
 /usr/local/bin/launch.sh
