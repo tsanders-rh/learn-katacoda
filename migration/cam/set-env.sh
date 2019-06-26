@@ -29,11 +29,12 @@ git clone -b http-deployment --single-branch https://github.com/eriknelson/mig-u
 cd ./mig-ui/deploy
 #dadomain=$(oc get routes -n mig | grep ^mig-ui | awk '{print $2}' | cut -d . -f 2- -) | sed 's/^/https:\/\//'
 #HOSTAPI=$dadomain ./deploy.sh
-HOSTAPI=https://[[HOST_SUBDOMAIN]]-[[KATACODA_HOST]].environments.katacoda.com ./deploy.sh
+dahostname=https://[[HOST_SUBDOMAIN]]-[[KATACODA_HOST]].environments.katacoda.com
+HOSTAPI=$dahostname ./deploy.sh
 
 #Update CORS config
-dahostname=$(oc get routes -n mig | grep ^mig-ui | awk '{print $2}' | sed 's/\./\\\\./g')
-awk 'FNR==NR{ if (/(?i)/) p=NR; next} 1; FNR==p{ print "- (?i)//'"$dahostname"'(:|\\z)" }' /etc/origin/master/master-config.yaml /etc/origin/master/master-config.yaml > tmpfile && mv -f tmpfile /etc/origin/master/master-config.yaml
+#dahostname=$(oc get routes -n mig | grep ^mig-ui | awk '{print $2}' | sed 's/\./\\\\./g')
+#awk 'FNR==NR{ if (/(?i)/) p=NR; next} 1; FNR==p{ print "- (?i)//'"$dahostname"'(:|\\z)" }' /etc/origin/master/master-config.yaml /etc/origin/master/master-config.yaml > tmpfile && mv -f tmpfile /etc/origin/master/master-config.yaml
 
 #Restart Master
 #master-restart api
